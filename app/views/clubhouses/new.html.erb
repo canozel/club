@@ -1,0 +1,14 @@
+<%= simple_form_for(@club) do |f| %>
+    <%= f.input :name, label: "Kulüp İsmi:", placeholder: "Lütfen kulüp ismi giriniz!" %>
+    <%= f.input :club_president, label: "Kulüp Başkanı" %>
+    <%= f.input :veep, label: "Başkan Yardımcısı" %>
+    <%= f.input :accountant, label: "Sayman" %>
+    <%= f.input :clerk, label: "Yazman" %>
+    <%= f.input :first_permanent_member, label: "1.Asil Üye" %>
+    <%= f.input :second_permanent_member, label: "2.Asil Üye" %>
+    <%= f.input :third_permanent_member, label: "3.Asil Üye" %>
+
+    <%= f.button :submit, "Oluştur", :class => "btn btn-primary" %>
+<% end %>
+
+<%= link_to "Geri", root_path %>

@@ -1,0 +1,7 @@
+<% @clubs.each do |club| %>
+    <%= club.name %>
+    <%= link_to "Düzenle", edit_clubhouse_path(club)%>
+
+<% end %>
+
+<%= link_to "Yeni Kulüp Oluştur", new_clubhouse_path %>
