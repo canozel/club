@@ -1,4 +1,17 @@
 Club::Application.routes.draw do
+  devise_for :members
+  devise_scope :member do
+    get 'register', to: 'devise/registrations#new', as: :register
+    get 'login', to: 'devise/sessions#new', as: :login
+    get 'update', to: 'devise/registrations#edit', as: :update
+    get 'logout', to: 'devise/sessions#destroy', as: :logout
+    get 'recover', to: 'devise/passwords#new', as: :recover
+  end
+
+  get 'admin', to: 'admin/members#index'
+  namespace :admin do
+    resources :members, only: [:index, :edit, :update, :destroy]
+  end
   resources :clubhouses
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

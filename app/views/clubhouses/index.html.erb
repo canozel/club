@@ -9,10 +9,12 @@
               <div class="col-md-9">
                   <strong><%= link_to club.name, clubhouse_path(club) %></strong>
               </div>
+            <% if member_signed_in? and (current_member.admin) %>
               <div class="col-md-3 ">
                   <%= link_to "Düzenle", edit_clubhouse_path(club), class: "btn btn-default"%> |
                   <%= link_to "Sil", club, method: :delete, data: { confirm: 'Emin misin?' }, class: "btn btn-danger" %>
               </div>
+            <% end %>
             <br><br>
         <% end %>
 
@@ -21,4 +23,35 @@
 </div>
 
 
-<%= link_to "Yeni Kulüp Oluştur", new_clubhouse_path, class: "btn btn-success"%>
+<div class="container">
+  <div class="row">
+    <a class="btn btn-primary" data-toggle="modal" href="#myModal" >Login</a>
+
+    <div class="modal hide" id="myModal">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h3>Login to MyWebsite.com</h3>
+      </div>
+      <div class="modal-body">
+
+        <%= simple_form_for login_path do |f| %>
+            <div class="form-inputs">
+              <%= f.input :email, required: false, autofocus: true %>
+              <%= f.input :password, required: false %>
+            </div>
+
+            <div class="form-actions">
+              <%= f.button :submit, "Log in" %>
+            </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        New To MyWebsite.com?
+        <a href="#" class="btn btn-primary">Register</a>
+      </div>
+    </div>
+  </div>
+</div>
+<% if member_signed_in? and (current_member.admin) %>
+    <%= link_to "Yeni Kulüp Oluştur", new_clubhouse_path, class: "btn btn-success"%>
+<% end %>

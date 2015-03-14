@@ -4,6 +4,10 @@
   <title>Club</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -11,18 +15,30 @@
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Ondokuz Mayıs Üniversitesi</a>
+          <a class="navbar-brand">Ondokuz Mayıs Üniversitesi</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"  id="dropdownMenu1">
+                  <% if member_signed_in? %>
+                      <span class="glyphicon glyphicon-user"></span> <%= current_member.name %>
+                  <% else %>
+                      <span class="glyphicon glyphicon-user"></span> Misafir Kullanıcı
+                  <% end %>
+                <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <% if member_signed_in? %>
+                    <% if current_member.admin %>
+                        <li><%= link_to "Yönetim Paneli", admin_path %></li>
+                    <% end %>
+                    <li><%= link_to "Çıkış Yap", logout_path %></li>
+                <% else %>
+                    <li><%= link_to "Giriş Yap", login_path %></li>
+                <% end %>
+              </ul>
+            </li>
             <li class="active"><%= link_to "Kulüpler", root_path %></li>
-            <li><a href="./">Yönetici Girişi <span class="sr-only">(current)</span></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

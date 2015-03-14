@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>
+      Üyeler
+    </h4>
+  </div>
+  <div class="panel-body">
+    <% @members.each do |member| %>
+        <div class="col-md-9">
+          <strong><%= link_to member.name, admin_path(member) %></strong>
+
+        </div>
+        <% if member_signed_in? and (current_member.admin) %>
+            <div class="col-md-3 ">
+              <% if member.president %>
+                  <%= link_to "Başkanlıktan Al", edit_admin_member_path(member), class: "btn btn-default"%> |
+              <% else %>
+                  <%= link_to "Başkan Yap", edit_admin_member_path(member), class: "btn btn-default"%> |
+              <% end %>
+
+              <%= link_to "Sil", admin_member_path(member), method: :delete, data: { confirm: 'Emin misin?' }, class: "btn btn-danger" %>
+            </div>
+        <% end %>
+        <br><br>
+    <% end %>
+
+  </div>
+</div>
+</div>
