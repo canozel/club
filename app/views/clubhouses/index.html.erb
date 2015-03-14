@@ -1,7 +1,24 @@
-<% @clubs.each do |club| %>
-    <%= club.name %>
-    <%= link_to "Düzenle", edit_clubhouse_path(club)%>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>
+      Kulüpler
+    </h4>
+  </div>
+      <div class="panel-body">
+        <% @clubs.each do |club| %>
+              <div class="col-md-9">
+                  <strong><%= link_to club.name, clubhouse_path(club) %></strong>
+              </div>
+              <div class="col-md-3 ">
+                  <%= link_to "Düzenle", edit_clubhouse_path(club), class: "btn btn-default"%> |
+                  <%= link_to "Sil", club, method: :delete, data: { confirm: 'Emin misin?' }, class: "btn btn-danger" %>
+              </div>
+            <br><br>
+        <% end %>
 
-<% end %>
+      </div>
+  </div>
+</div>
 
-<%= link_to "Yeni Kulüp Oluştur", new_clubhouse_path %>
+
+<%= link_to "Yeni Kulüp Oluştur", new_clubhouse_path, class: "btn btn-success"%>

@@ -12,7 +12,7 @@ class ClubhousesController < ApplicationController
   end
 
   def create
-    @club = Clubhouse.new(:clubhouse_params)
+    @club = Clubhouse.new(clubhouse_params)
     if @club.save
       redirect_to @club, notice: 'İlan başarıyla oluşturuldu!'
     else
@@ -21,7 +21,6 @@ class ClubhousesController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
@@ -33,8 +32,8 @@ class ClubhousesController < ApplicationController
   end
 
   def destroy
-    @club.destroy
-    redirect_to clubhouse_url, notice: 'İlan başarıyla silindi!'
+    @club.delete
+    redirect_to root_path, notice: 'İlan başarıyla silindi!'
   end
 
   private
@@ -43,6 +42,6 @@ class ClubhousesController < ApplicationController
   end
 
   def clubhouse_params
-    params.require(:clubhouses).permit(:name, :club_president, :veep, :accountant, :clerk, :first_permanent_member, :second_permanent_member, :third_permanent_member)
+    params.require(:clubhouse).permit(:name, :club_president, :veep, :accountant, :clerk, :first_permanent_member, :second_permanent_member, :third_permanent_member)
   end
 end
